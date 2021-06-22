@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 5.times do
     Task.create({
-        owner: Faker::Alphanumeric.alphanumeric(number: 10),
+        owner: Faker::Number.number(digits: 7),
         title: Faker::Book.title,
         description: Faker::Lorem.sentence,
         status: "pending",

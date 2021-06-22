@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  owner: MyString
-  title: MyString
-  description: MyText
-  status: MyString
-  visibility: MyString
+  owner: 1
+  title: Wash your hands
+  description: Because there are viruses outside
+  status: done
+  visibility: public
 
 two:
-  owner: MyString
-  title: MyString
-  description: MyText
-  status: MyString
-  visibility: MyString
+  owner: 2
+  title: Put a mask
+  description: Viruses again
+  status: pending
+  visibility: public

@@ -10,14 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_21_224500) do
+ActiveRecord::Schema.define(version: 2021_06_22_194816) do
 
   create_table "tasks", force: :cascade do |t|
-    t.string "owner"
+    t.integer "owner"
     t.string "title"
     t.text "description"
     t.string "status"
     t.string "visibility"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
