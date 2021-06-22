@@ -7,9 +7,11 @@ module Api
                     .try(:authenticate, params['password'])
                 
                 if user
+                    token = generate_token(user)
                     render json: {
                         logged_in: true,
-                        user: user.as_json(only: [:id, :email])
+                        user: user.as_json(only: [:id, :email]),
+                        jwt: token
                     }, status: :created
                 else
                     render json: {

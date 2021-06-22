@@ -20,19 +20,35 @@ module Api
             end
 
             def create
-                task = Task.new task_params
+                token = params[:jwt]
+                if token
+                    user_id = get_user_id_from_token(token)
+                    if user_id
+                        task = Task.new(
+                            title: params[:title],
+                            description: params[:description],
+                            visibility: params[:visibility],
+                            status: params[:status],
+                            owner: user_id
+                        )
 
-                if task.save
-                    render json: {
-                        status: 'SUCCESS',
-                        message: 'Task saved',
-                    }, status: :ok
-                else
-                    render json: {
-                        status: 'Error',
-                        message: 'Task not saved',
-                    }, status: :unprocessable_entity
+                        if task.save
+                            return render json: {
+                                status: 'SUCCESS',
+                                message: 'Task saved',
+                            }, status: :ok
+                        else
+                            return render json: {
+                                status: 'Error',
+                                message: 'Task not saved',
+                            }, status: :unprocessable_entity
+                        end
+                    end
                 end
+                render json: {
+                    status: 'Error',
+                    message: 'Invalid token',
+                }, status: :unauthorized
             end
 
             def update
@@ -62,7 +78,7 @@ module Api
             private
 
             def task_params
-                params.permit :title, :description, :owner, :status, :visibility
+                params.permit :jwt, :title, :description, :status, :visibility
             end
         end
     end

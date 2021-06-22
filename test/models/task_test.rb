@@ -26,7 +26,7 @@ class TaskTest < ActiveSupport::TestCase
   end
 
   test 'may not have description' do
-    task = Task.new title: "some title", owner: 1, status: "public", visibility: "public"
+    task = Task.new title: "some title", owner: 1, status: "pending", visibility: "public"
     assert task.save
   end
 
