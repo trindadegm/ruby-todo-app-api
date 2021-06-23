@@ -8,7 +8,8 @@ class ApplicationController < ActionController::API
         JWT.encode data, unique_key, 'HS256'
     end
 
-    def get_user_id_from_token(token)
+    def auth_user_from_header_token
+        token = request.headers['Authorization']
         unique_key = Rails.application.secrets.secret_key_base
         begin
             decoded = JWT.decode token, unique_key, true, { algorithm: 'HS256' }
